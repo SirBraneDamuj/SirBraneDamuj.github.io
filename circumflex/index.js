@@ -1,4 +1,4 @@
-const availableInterruptions = ["|", "^", "%", "hahaha"];
+const availableInterruptions = ["|", "^", "%", "hahaha", "_"];
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
