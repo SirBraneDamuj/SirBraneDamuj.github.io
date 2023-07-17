@@ -22,17 +22,18 @@ function circumflexTheText(text, interruptions, frequency) {
 
 $(document).ready(() => {
   const interruptionsSelect = $("#interruptions");
-  for (const interruption of availableInterruptions) {
-    const option = document.createElement("option", {
-      value: interruption,
-    });
-    option.innerHTML = interruption;
-    interruptionsSelect.append(option);
-  }
+  interruptionsSelect.val(availableInterruptions.join("\n"));
+
+  const frequencySlider = $("#frequency");
+  frequencySlider.on("input", (e) => {
+    const percent = e.target.value * 100;
+    $("#frequency-label").text(`Frequency: ${percent.toFixed(0)}%`);
+  });
+  frequencySlider.val("0.1").trigger("input");
 
   $("#submit-button").on("click", () => {
     const input = $("#input-text").val();
-    const chosenInterruptions = $("#interruptions").val();
+    const chosenInterruptions = $("#interruptions").val().split("\n");
     const frequency = $("#frequency").val();
     $("#output-text").val(
       circumflexTheText(input, chosenInterruptions, frequency)

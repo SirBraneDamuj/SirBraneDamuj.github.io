@@ -18,17 +18,35 @@
 
     <div class="d-flex flex-column w-25">
 
-        <textarea id="input-text" class="my-1" rows="5"
+        <label for="input-text">
+            Input text:
+        </label>
+        <textarea id="input-text" name="input-text" class="my-1" rows="5"
             placeholder="Paste text here to circumflex the shit out of it"></textarea>
 
+        <!--
         <select id="interruptions" class="my-1" multiple size="8">
         </select>
+        -->
 
-        <input id="frequency" class="my-1" type="number" value="0.1" step="0.01" min="0" max="1" />
+        <label for="interruptions">
+            Interruptions, one phrase per line:
+        </label>
 
-        <button role="primary" class="my-1 mx-auto" id="submit-button">Submit</button>
+        <textarea id="interruptions" name="interruptions" class="my-1" rows="8">
 
-        <textarea id="output-text" class="my-1" disabled="true" rows="5">Output goes here.</textarea>
+        </textarea>
+
+        <label id="frequency-label" for="frequency">
+        </label>
+        <input id="frequency" name="frequency" class="my-1" type="range" value="0.1" step="0.01" min="0" max="1" />
+
+        <button role="primary" class="my-1 mx-auto" id="submit-button">UNDERSCORE</button>
+
+        <label for="output-text">
+            Output text:
+        </label>
+        <textarea id="output-text" name="output-text" class="my-1" disabled="true" rows="5">Output goes here.</textarea>
     </div>
 </body>
 
