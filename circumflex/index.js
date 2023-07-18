@@ -21,6 +21,12 @@ function circumflexTheText(text, interruptions, frequency) {
 }
 
 $(document).ready(() => {
+  const clipboard = new ClipboardJS(".copy-button");
+  clipboard.on("success", function (e) {
+    $(".copy-button").text("Copied!");
+    e.clearSelection();
+    setTimeout(() => $(".copy-button").text("Copy"), 2000);
+  });
   const interruptionsSelect = $("#interruptions");
   interruptionsSelect.val(availableInterruptions.join("\n"));
 
