@@ -24,7 +24,7 @@ const availableSyllables = ["æ", "œ"];
 
 const finale = " œœœœœœ ææææææ œœœœœœ ææææææ œœœœœœ ææææææ";
 
-function aaahhhTheText(text, frequency, finale) {
+function aaahhhTheText(text, frequency, includeFinale) {
   const replaced = text.replaceAll(/[aeiou]/gi, (match) => {
     const test = Math.random();
     if (test <= frequency) {
@@ -32,7 +32,7 @@ function aaahhhTheText(text, frequency, finale) {
     }
     return match;
   });
-  if (finale) {
+  if (includeFinale) {
     return replaced + finale;
   } else {
     return replaced;
@@ -82,9 +82,12 @@ function setupAaahhh() {
 
   $("#aaahhh-submit-button").on("click", () => {
     const input = $("#aaahhh-input-text").val();
-    const finale = $("#aaahhh-finale").val() === true;
+    const includeFinale = $("#aaahhh-finale").prop("checked");
+    console.log(includeFinale);
     const frequency = $("#aaahhh-frequency").val();
-    $("#aaahhh-output-text").val(aaahhhTheText(input, frequency, finale));
+    $("#aaahhh-output-text").val(
+      aaahhhTheText(input, frequency, includeFinale)
+    );
   });
 }
 
