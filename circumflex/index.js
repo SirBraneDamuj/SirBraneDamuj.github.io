@@ -19,13 +19,32 @@ function circumflexTheText(text, interruptions, frequency) {
   }
   return result;
 }
+// œœœœœœ ææææææ œœœœœœ ææææææ œœœœœœ ææææææ
+const availableSyllables = ["æ", "œ"];
 
-$(document).ready(() => {
-  const clipboard = new ClipboardJS(".copy-button");
+const finale = " œœœœœœ ææææææ œœœœœœ ææææææ œœœœœœ ææææææ";
+
+function aaahhhTheText(text, frequency, finale) {
+  const replaced = text.replaceAll(/[aeiou]/gi, (match) => {
+    const test = Math.random();
+    if (test <= frequency) {
+      return availableSyllables[getRandomInt(2)];
+    }
+    return match;
+  });
+  if (finale) {
+    return replaced + finale;
+  } else {
+    return replaced;
+  }
+}
+
+function setupCircumflex() {
+  const clipboard = new ClipboardJS("#copy-button");
   clipboard.on("success", function (e) {
-    $(".copy-button").text("Copied!");
+    $("#copy-button").text("Copied!");
     e.clearSelection();
-    setTimeout(() => $(".copy-button").text("Copy"), 2000);
+    setTimeout(() => $("#copy-button").text("Copy"), 2000);
   });
   const interruptionsSelect = $("#interruptions");
   interruptionsSelect.val(availableInterruptions.join("\n"));
@@ -45,4 +64,31 @@ $(document).ready(() => {
       circumflexTheText(input, chosenInterruptions, frequency)
     );
   });
+}
+
+function setupAaahhh() {
+  const clipboard = new ClipboardJS("#aaahhh-copy-button");
+  clipboard.on("success", function (e) {
+    $("#aaahhh-copy-button").text("Copied!");
+    e.clearSelection();
+    setTimeout(() => $("#aaahhh-copy-button").text("Copy"), 2000);
+  });
+  const frequencySlider = $("#aaahhh-frequency");
+  frequencySlider.on("input", (e) => {
+    const percent = e.target.value * 100;
+    $("#aaahhh-frequency-label").text(`Frequency: ${percent.toFixed(0)}%`);
+  });
+  frequencySlider.val("0.1").trigger("input");
+
+  $("#aaahhh-submit-button").on("click", () => {
+    const input = $("#aaahhh-input-text").val();
+    const finale = $("#aaahhh-finale").val() === true;
+    const frequency = $("#aaahhh-frequency").val();
+    $("#aaahhh-output-text").val(aaahhhTheText(input, frequency, finale));
+  });
+}
+
+$(document).ready(() => {
+  setupCircumflex();
+  setupAaahhh();
 });
